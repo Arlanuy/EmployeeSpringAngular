@@ -1,1 +1,29 @@
 <p>new-employee-and-update works!</p>
+
+<div class="row">
+    <div class = "col-md-4">
+        
+    </div>
+    <div class = "col-md-4">
+        <form [formGroup] = "employeeForm" (ngSubmit)="formSubmit()">
+            <div class="form-group">
+                <label>Enter name:</label>
+                <input type=text formControlName="name" name="name" class="form-control" placeholder="Enter name"/>
+                <p style="color: red;" *ngIf="employeeForm.controls.name.valid == 'INVALID' && employeeForm.controls.name.touched"> this field is required</p> 
+            </div>
+
+            <div class="form-group">
+                <label>Enter name:</label>
+                <input type=email formControlName="email" name="email" class="form-control" placeholder="Enter email"/>
+                <p style="color: red;" *ngIf="employeeForm.controls.email.valid == 'INVALID' && employeeForm.controls.email.touched"> this field is required</p> 
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary" [disabled] = "employeeForm.status == 'INVALID'" type="submit">Submit</button> 
+            </div>
+        </form>
+    </div>
+    <div class = "col-md-4">
+        
+    </div>
+</div>

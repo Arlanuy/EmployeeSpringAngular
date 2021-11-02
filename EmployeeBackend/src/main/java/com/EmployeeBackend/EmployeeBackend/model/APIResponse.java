@@ -3,7 +3,6 @@ package com.EmployeeBackend.EmployeeBackend.model;
 public class APIResponse {
 	private String message;
 	public APIResponse(String message, boolean success) {
-		super();
 		this.message = message;
 		this.success = success;
 	}
