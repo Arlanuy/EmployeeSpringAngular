@@ -11,6 +11,7 @@ import com.EmployeeBackend.EmployeeBackend.model.Employee;
 import com.EmployeeBackend.EmployeeBackend.repository.EmployeeRepository;
 
 @RestController
+
 @CrossOrigin(origins = "http://localhost:4200")
 public class EmployeeController {
 	@Autowired
@@ -33,6 +34,11 @@ public class EmployeeController {
 		}
 		
 		return response;
+	}
+	
+	@GetMapping("/employeeList")
+	public Iterable<Employee> getAllEmployee() {
+		return this.empRepository.findAll();
 	}
 	
 }

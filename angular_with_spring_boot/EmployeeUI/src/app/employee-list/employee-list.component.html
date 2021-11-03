@@ -1,0 +1,30 @@
+<br>
+    <button class="btn btn-info" style="float: right;" routerLink="/saveEmployee">Add new employee</button>
+<br/>
+
+<table class = "table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of employeeList">
+            <td>
+                {{emp.name}}
+            </td>
+            <td>
+                {{emp.email}}
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="editEmployee(emp)">Edit</button>
+            </td>
+            <td>
+                <button class="btn btn-primary"(click)="deleteEmployee(emp)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

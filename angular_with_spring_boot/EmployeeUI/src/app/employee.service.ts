@@ -16,6 +16,10 @@ export class EmployeeService {
     console.log("Request is sent to ", this.url);
     return this.http.post<APIResponse>(this.url+"saveEmployee", payload);
   }
+
+  getAllEmployee() :Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.url + "employeeList")
+  }
 }
 
 export class APIResponse {
