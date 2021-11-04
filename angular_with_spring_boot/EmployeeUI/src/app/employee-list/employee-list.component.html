@@ -9,6 +9,7 @@
             <th>Email</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>View</th>
         </tr>
     </thead>
     <tbody>
@@ -20,10 +21,13 @@
                 {{emp.email}}
             </td>
             <td>
-                <button class="btn btn-primary" (click)="editEmployee(emp)">Edit</button>
+                <button class="btn btn-primary" (click)="editEmployee(emp.id)">Edit</button>
             </td>
             <td>
-                <button class="btn btn-primary"(click)="deleteEmployee(emp)">Delete</button>
+                <button class="btn btn-danger"(click)="deleteEmployee(emp.id)">Delete</button>
+            </td>
+            <td>
+                <button class="btn btn-primary"(click)="viewEmployee(emp.id)">View</button>
             </td>
         </tr>
     </tbody>

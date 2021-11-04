@@ -1,40 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 
 @Component({
-  selector: 'app-new-employee-and-update',
-  templateUrl: './new-employee-and-update.component.html',
-  styleUrls: ['./new-employee-and-update.component.css']
+  selector: 'app-update-only-employee',
+  templateUrl: './update-only-employee.component.html',
+  styleUrls: ['./update-only-employee.component.css']
 })
-export class NewEmployeeAndUpdateComponent implements OnInit {
-  employee: Employee = new Employee();
+export class UpdateOnlyEmployeeComponent implements OnInit {
   employeeForm:any;
-  constructor( 
+  employee: Employee = new Employee();
+  id: number = -1;
+  constructor(
+    
     private empService:EmployeeService,
-    private router : Router
-  ){
+    private router:Router,
+    private act_route: ActivatedRoute
+  ) { 
     this.employeeForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required]),
     })
-
-    
-
   }
 
   ngOnInit(): void {
+    this.id = this.act_route.snapshot.params['id'];
+    this.empService.getEmployeeById(this.id).subscribe(data => {
+      this.employee = data;
+    }, error => console.log(error));
   }
 
   goToEmployeeList() {
     this.router.navigate(['/employeeList']);
   }
 
-  formSubmitSave(): void {
+  formSubmitUpdate(): void {
     console.log(this.employeeForm.value);
-    this.empService.saveEmployee(this.employeeForm.value).subscribe(
+    this.empService.editEmployee(this.id, this.employee).subscribe(
       (response)=>{
         console.log(response);
         this.goToEmployeeList();
@@ -43,4 +47,5 @@ export class NewEmployeeAndUpdateComponent implements OnInit {
   }
 
 
+  
 }

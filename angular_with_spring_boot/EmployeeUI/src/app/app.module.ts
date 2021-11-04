@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewEmployeeAndUpdateComponent } from './new-employee-and-update/new-employee-and-update.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { UpdateOnlyEmployeeComponent } from './update-only-employee/update-only-employee.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewEmployeeAndUpdateComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    UpdateOnlyEmployeeComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     BrowserModule,
