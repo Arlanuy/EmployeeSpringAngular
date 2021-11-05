@@ -37,15 +37,18 @@ export class UpdateOnlyEmployeeComponent implements OnInit {
   }
 
   formSubmitUpdate(): void {
-    console.log(this.employeeForm.value);
+    console.log("value is " + this.employeeForm.value.name + this.employeeForm.value.email);
+    this.employee = this.employeeForm.value;
+    console.log("employee now is " + this.employee.name + " " + this.employee.email)
     this.empService.editEmployee(this.id, this.employee).subscribe(
       (response)=>{
-        console.log(response);
+        
+        console.log("Response is " + response);
         this.goToEmployeeList();
-      }
-    )
+      }, error => console.log("error at update is " + error)
+    );
   }
 
-
+ 
   
 }

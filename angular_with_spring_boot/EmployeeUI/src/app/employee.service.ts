@@ -23,15 +23,19 @@ export class EmployeeService {
   }
   
   getEmployeeById(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.url}/employee/${id}`)
+    return this.http.get<Employee>(`${this.url}/${id}`)
   }
 
   editEmployee(id: number, employee: Employee): Observable<Object> {
-    return this.http.put(`${this.url}/employee/${id}`, employee);
+   // const headers = new Headers();
+    //headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    //headers.append('Access-Control-Allow-Methods', 'PUT');
+    //headers.append('Access-Control-Allow-Origin', '*');
+    return this.http.put(`${this.url}/${id}`, employee);
   }
 
   deleteEmployee(id: number): Observable<Object> {
-    return this.http.delete(`${this.url}/employee/${id}`);
+    return this.http.delete(`${this.url}/${id}`);
   }
 }
 

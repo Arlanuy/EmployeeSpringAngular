@@ -18,8 +18,8 @@ import com.EmployeeBackend.EmployeeBackend.model.Employee;
 import com.EmployeeBackend.EmployeeBackend.repository.EmployeeRepository;
 
 @RestController
-@RequestMapping("/api/v1/employees")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/v1/employees/")
+@CrossOrigin(origins = "http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
 public class EmployeeController {
 	@Autowired
 	private EmployeeRepository empRepository;
@@ -51,32 +51,38 @@ public class EmployeeController {
 	
 	//get employee by id
 	
-	@GetMapping("/employee/{id}")
+	//@GetMapping("/employee/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
 		Employee employee = this.empRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee unexistent with given id " + id));
 		return ResponseEntity.ok(employee);
 	}
 	
 	//update employee
-	@RequestMapping("/api/v1/employees/employee")
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/employee/{id}")
-	public APIResponse updateEmployee(@PathVariable Integer id, Employee employeeDetails) {
+	
+	//@PutMapping("/employee/{id}")
+	@PutMapping("/{id}")
+	@CrossOrigin(origins = "http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
+	public APIResponse editEmployee(@PathVariable Integer id, @RequestBody Employee employeeDetails) {
 		Employee employee = this.empRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee unexistent with given id " + id));
+		System.out.println("The details got are " + employeeDetails.getName() + " and " + employeeDetails.getEmail());
 		employee.setName(employeeDetails.getName());
 		employee.setEmail(employeeDetails.getEmail());
 		APIResponse response;
+
 		try {
 			this.empRepository.save(employee);
 			response = new APIResponse("Employee updated successfully.", true);
 		}catch(Exception e) {
-			response = new APIResponse("Employee not updated." + e.getMessage(), false);
+			 response = new APIResponse("Employee not updated." + e.getMessage(), false);
 		}
+		System.out.println("response is " + response.getMessage());
 		return response;
-	}
+	}   
 	
 	//delete employee
-	@DeleteMapping("/employee/{id}")
+	//@DeleteMapping("/employee/{id}")
+	@DeleteMapping("/{id}")
 	public APIResponse deleteEmployee(@PathVariable Integer id) {
 		Employee employee = this.empRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee unexistent with given id " + id));
 		APIResponse response;
@@ -84,7 +90,7 @@ public class EmployeeController {
 			this.empRepository.delete(employee);
 			response = new APIResponse("Employee deleted successfully.", true);
 		}catch(Exception e) {
-			response = new APIResponse("Employee not deleted." + e.getMessage(), false);
+			 response = new APIResponse("Employee not deleted." + e.getMessage(), false);
 		}
 		return response;
 		
