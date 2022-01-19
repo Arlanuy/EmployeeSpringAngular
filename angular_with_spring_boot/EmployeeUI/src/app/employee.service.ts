@@ -3,15 +3,20 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from './employee';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  private url:string = "http://localhost:8080/api/v1/employees/";
+  private url:string = environment.serverUrl;
 
   constructor(
     private http:HttpClient
    ) { }
+
+   public getHttpTraces(): Observable<Object> {
+     return this.http.get(`${this.url}/httptrace`);
+   }
 
   saveEmployee(payload: Employee): Observable<APIResponse> {
     console.log("Request is sent to ", this.url);
